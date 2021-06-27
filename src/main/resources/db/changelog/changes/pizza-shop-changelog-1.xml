@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="reddy" id="1">
+        <createTable tableName="PSO_PIZZA">
+            <column name="CODE" type="CHAR(4)">
+                <constraints primaryKey="true" primaryKeyName="PK_PIZZA"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BASE_PRICE" type="float" defaultValue="10">
+            <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="PSO_INGREDIENT">
+            <column name="CODE" type="CHAR(4)">
+                <constraints primaryKey="true" primaryKeyName="PK_INGREDIENT"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="float">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="PSO_PIZZA_INGREDIENTS">
+            <column name="PIZZA_CODE" type="CHAR(4)">
+                <constraints primaryKey="true" referencedTableName="PSO_PIZZA" referencedColumnNames="CODE" nullable="false"  foreignKeyName="FK_PIZZA_ING"/>
+            </column>
+            <column name="INGREDIENT_CODE" type="CHAR(4)">
+                <constraints primaryKey="true" referencedTableName="PSO_INGREDIENT" referencedColumnNames="CODE" nullable="false" foreignKeyName="FK_INGREDIENT_PIZZA"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="PSO_USER">
+            <column name="CODE" type="CHAR(3)">
+                <constraints primaryKey="true" primaryKeyName="PK_CUSTOMER"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PHONE_NUMBER" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STREET" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STREET_NO" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PIN_CODE" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="PSO_ROLE">
+            <column name="CODE" type="VARCHAR(10)">
+                <constraints primaryKey="true" primaryKeyName="PK_ROLE"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="PSO_USER_ROLES">
+            <column name="USER_CODE" type="CHAR(3)">
+                <constraints primaryKey="true" referencedTableName="PSO_USER" referencedColumnNames="CODE" nullable="false"  foreignKeyName="FK_USER_CODE"/>
+            </column>
+            <column name="ROLE_CODE" type="VARCHAR(10)">
+                <constraints primaryKey="true" referencedTableName="PSO_ROLE" referencedColumnNames="CODE" nullable="false" foreignKeyName="FK_ROLE_CODE"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="PSO_ORDER">
+            <column autoIncrement="true" name="ID" type="numeric(18, 0)">
+                <constraints primaryKey="true" primaryKeyName="PK_ORDER"/>
+            </column>
+            <column name="CUSTOMER_CODE" type="CHAR(3)">
+                <constraints referencedTableName="PSO_USER" referencedColumnNames="CODE" nullable="false" foreignKeyName="FK_CUSTOMER_CODE"/>
+            </column>
+           <!-- <column name="PIZZA_CODE" type="CHAR(10)">
+                <constraints referencedTableName="PIZZA" referencedColumnNames="CODE" nullable="false" foreignKeyName="FK_ORDER_PIZZA"/>
+            </column>
+            <column name="QUANTITY" type="numeric(4,0)">
+                <constraints nullable="false"/>
+            </column>-->
+            <column name="CREATED_ON" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="PSO_ORDER_DETAIL">
+            <column name="ORDER_ID" type="numeric(18, 0)">
+                <constraints primaryKey="true" referencedTableName="PSO_ORDER" referencedColumnNames="ID" nullable="false" foreignKeyName="FK_ORDER_ID"/>
+            </column>
+            <column name="PIZZA_CODE" type="CHAR(4)">
+                <constraints primaryKey="true" referencedTableName="PSO_PIZZA" referencedColumnNames="CODE" nullable="false" foreignKeyName="FK_ORDER_PIZZA_CODE"/>
+            </column>
+            <column name="QUANTITY" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="float">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="PSO_ORDER_TRACKING">
+            <column autoIncrement="true" name="ID" type="numeric(18, 0)">
+                <constraints primaryKey="true" primaryKeyName="PK_TRACKING"/>
+            </column>
+            <column name="ORDER_ID" type="numeric(18, 0)">
+                <constraints referencedTableName="PSO_ORDER" referencedColumnNames="ID" nullable="false" foreignKeyName="FK_ORDER_TRACKING"/>
+            </column>
+            <column name="STATUS" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTIVE" type="CHAR(1)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COMMENTS" type="VARCHAR(255)"/>
+            <column name="CREATED_ON" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_ON" type="datetime"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
