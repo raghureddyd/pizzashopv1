@@ -18,10 +18,10 @@ import java.util.stream.Collectors;
 @Service
 public class UserRegistrationServiceImpl implements UserRegistrationService {
 
-    private UserRepository userRepository;
-    private UserRolesRepository userRolesRepository;
+    private final UserRepository userRepository;
+    private final UserRolesRepository userRolesRepository;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public UserRegistrationServiceImpl(UserRepository userRepository,UserRolesRepository userRolesRepository,ModelMapper modelMapper) {

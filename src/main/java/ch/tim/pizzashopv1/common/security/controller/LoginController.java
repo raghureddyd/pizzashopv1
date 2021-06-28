@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/v1")
 public class LoginController {
 
-    private JwtUtility jwtUtility;
+    private final JwtUtility jwtUtility;
 
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    private UserService userService;
+    private final UserService userService;
     @Autowired
     public LoginController(JwtUtility jwtUtility, AuthenticationManager authenticationManager, UserService userService) {
         this.jwtUtility = jwtUtility;

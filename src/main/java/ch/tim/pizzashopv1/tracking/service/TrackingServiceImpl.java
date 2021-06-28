@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class TrackingServiceImpl implements TrackingService {
 
-    private TrackingDAO trackingDAO;
+    private final TrackingDAO trackingDAO;
 
     @Autowired
     public TrackingServiceImpl(TrackingDAO trackingDAO) {
@@ -41,9 +41,11 @@ public class TrackingServiceImpl implements TrackingService {
             orderTracking = mapToEntity(trackingDTO);
             orderTracking.setUpdatedOn(LocalDateTime.now());
         }else {
+            if (currentOrderTracking != null) {
             currentOrderTracking.setActive(false);
             currentOrderTracking.setUpdatedOn(LocalDateTime.now());
             trackingDAO.save(currentOrderTracking);
+            }
             //New tracking status
             trackingDTO.setTrackId(null);
             orderTracking = mapToEntity(trackingDTO);

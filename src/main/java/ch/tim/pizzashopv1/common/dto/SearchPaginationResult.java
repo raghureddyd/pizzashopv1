@@ -13,9 +13,9 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SearchPaginationResult<T> {
 
-    private Integer rowCount;
+    private final Integer rowCount;
 
-    private List<T> data;
+    private final List<T> data;
 
     @JsonCreator
     public SearchPaginationResult(@JsonProperty("rowCount") Integer rowCount, @JsonProperty("data") List<T> data) {

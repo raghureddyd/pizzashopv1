@@ -1,7 +1,6 @@
 package ch.tim.pizzashopv1.tracking.controller;
 
 import ch.tim.pizzashopv1.common.dto.SearchPaginationResult;
-import ch.tim.pizzashopv1.order.controller.OrderController;
 import ch.tim.pizzashopv1.tracking.service.TrackingService;
 import ch.tim.pizzashopv1.tracking.to.TrackingDTO;
 import org.slf4j.Logger;
@@ -22,7 +21,7 @@ public class TrackingController {
 
     private static final Logger log = LoggerFactory.getLogger(TrackingController.class);
 
-    private TrackingService trackingService;
+    private final TrackingService trackingService;
 
     @Autowired
     public TrackingController(TrackingService trackingService) {

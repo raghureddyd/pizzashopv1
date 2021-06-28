@@ -20,7 +20,7 @@ public class PizzaController {
 
     private static final Logger log = LoggerFactory.getLogger(PizzaController.class);
 
-    private PizzaService pizzaService;
+    private final PizzaService pizzaService;
 
     @Autowired
     public PizzaController(PizzaService pizzaService) {

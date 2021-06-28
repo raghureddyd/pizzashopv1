@@ -19,10 +19,10 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    private JwtUtility jwtUtility;
+    private final JwtUtility jwtUtility;
 
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public JwtFilter(JwtUtility jwtUtility, UserService userService) {

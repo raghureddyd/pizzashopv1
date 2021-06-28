@@ -16,7 +16,7 @@ public enum MessageCode {
         this.description = description;
     }
 
-    public static final MessageCode fromValue(final String value) {
+    public static MessageCode fromValue(final String value) {
         for (MessageCode messageCode : values()) {
             if (messageCode.value().equals(value)) {
                 return messageCode;

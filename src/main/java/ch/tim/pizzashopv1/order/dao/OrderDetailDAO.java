@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface OrderDetailDAO extends JpaRepository<OrderDetail, Long> {
 
-    @Query("select od from OrderDetail od where od.id.orderId=:orderId")
+    @Query("select od from OrderDetail od where od.orderId=:orderId")
     List<OrderDetail> getOrderDetailByOrderId(@Param("orderId") Long id);
 
 }

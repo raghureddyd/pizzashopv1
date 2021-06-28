@@ -26,7 +26,7 @@ class PizzaControllerTest extends BaseTest {
     void getAllPizza() throws Exception {
         List<PizzaDTO> pizzaDTOList = List.of(
           new PizzaDTO("CHIC", 12.00f, "Chicago Pizza", "basil,beef,mozzarella,virgin olive oil"));
-        when(pizzaService.getPizzas()).thenReturn(new SearchPaginationResult(1, pizzaDTOList));
+        when(pizzaService.getPizzas()).thenReturn(new SearchPaginationResult<>(1, pizzaDTOList));
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/pizzas")
                           .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
           .andExpect(jsonPath("$.data[0].code").value("CHIC"))

@@ -3,18 +3,14 @@ package ch.tim.pizzashopv1.order.service;
 import ch.tim.pizzashopv1.common.dto.SearchPaginationResult;
 import ch.tim.pizzashopv1.common.exception.ApplicationException;
 import ch.tim.pizzashopv1.common.exception.MessageCode;
-
+import ch.tim.pizzashopv1.order.dao.OrderDAO;
+import ch.tim.pizzashopv1.order.dao.OrderDetailDAO;
 import ch.tim.pizzashopv1.order.domain.Order;
 import ch.tim.pizzashopv1.order.domain.OrderDetail;
-import ch.tim.pizzashopv1.order.dao.OrderDetailDAO;
-import ch.tim.pizzashopv1.order.dao.OrderDAO;
-
 import ch.tim.pizzashopv1.order.to.OrderDTO;
 import ch.tim.pizzashopv1.order.to.OrderDetailDTO;
-import ch.tim.pizzashopv1.pizza.to.PizzaDTO;
 import ch.tim.pizzashopv1.tracking.Status;
 import ch.tim.pizzashopv1.tracking.dao.TrackingDAO;
-
 import ch.tim.pizzashopv1.tracking.domain.OrderTracking;
 import ch.tim.pizzashopv1.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +20,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService{
 
-    private OrderDAO orderDAO;
-    private OrderDetailDAO orderDetailDAO;
-    private TrackingDAO trackingDAO;
+    private final OrderDAO orderDAO;
+    private final OrderDetailDAO orderDetailDAO;
+    private final TrackingDAO trackingDAO;
 
 
     @Autowired
@@ -61,9 +56,9 @@ public class OrderServiceImpl implements OrderService{
             orderDTO.setCustName(customer.getFirstName()+ " "+customer.getLastName());
             orderDTO.setAddress(customer.getStreet()+ " "+ customer.getStreetNo()+ " "+customer.getPinCode());
             List<OrderDetail> orderDetailByOrderId = orderDetailDAO.getOrderDetailByOrderId(order.getId());
-            orderDetailByOrderId.stream().forEach(src -> orderDetailDTOList.add(mapToDTO(src)));
+            orderDetailByOrderId.forEach(src -> orderDetailDTOList.add(mapToDTO(src)));
             orderDTO.setOrderDetailDTOList(orderDetailDTOList);
-            result = new SearchPaginationResult<OrderDTO>(1, List.of(orderDTO));
+            result = new SearchPaginationResult<>(1, List.of(orderDTO));
         }else{
             throw new ApplicationException(MessageCode.NOT_FOUND,MessageCode.NOT_FOUND.getDescription());
         }

@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 @Service
 public class PizzaServiceImpl implements PizzaService {
 
-    private PizzaDAO pizzaDAO;
-    private IngredientDAO ingredientDAO;
+    private final PizzaDAO pizzaDAO;
+    private final IngredientDAO ingredientDAO;
 
     @Autowired
     public PizzaServiceImpl(PizzaDAO pizzaDAO, IngredientDAO ingredientDAO) {

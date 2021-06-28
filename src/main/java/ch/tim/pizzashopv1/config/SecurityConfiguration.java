@@ -39,11 +39,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
       "/api/v1/trackings/**"
     };
 
-    @Autowired
     private UserService userService;
 
-    @Autowired
     private JwtFilter jwtFilter;
+
+    @Autowired
+    public SecurityConfiguration(UserService userService, JwtFilter jwtFilter) {
+        this.userService = userService;
+        this.jwtFilter = jwtFilter;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

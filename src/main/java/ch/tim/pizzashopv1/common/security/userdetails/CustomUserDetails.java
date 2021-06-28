@@ -18,9 +18,7 @@ public class CustomUserDetails extends User implements UserDetails {
     private static final long serialVersionUID = -5456973816660806109L;
 
 
-    private Collection<SimpleGrantedAuthority> authorities = new HashSet<>();
-
-    private Set<String> userRoles = new HashSet<>();
+    private final Collection<SimpleGrantedAuthority> authorities = new HashSet<>();
 
     private User user;
 
@@ -36,7 +34,8 @@ public class CustomUserDetails extends User implements UserDetails {
             this.setPassword(user.getPassword());
             Collection<UserRoles> userRolesByCode = user.getUserRolesByCode();
             for (UserRoles userRolesL:userRolesByCode) {
-                this.userRoles.add(userRolesL.getRoleByCode().getCode());
+                Set<String> userRoles = new HashSet<>();
+                userRoles.add(userRolesL.getRoleByCode().getCode());
                 authorities.add(new SimpleGrantedAuthority(userRolesL.getRoleByCode().getCode()));
             }
 

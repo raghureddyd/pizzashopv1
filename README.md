@@ -17,11 +17,11 @@ Online Pizza Ordering Webapplication
 - Ordering pizzas (Only logged-in users can order)
 - View order status (anonymous access)
 - Update order status (Only staff or admin roles)
-- View users (Only Only staff or admin roles)
+- View users (Only staff or admin roles)
 - Register user (anonymous access)
 
 ## Roles
-- USER (on registration this role is assigned by default)
+- USER (on registration, this role is assigned by default)
 
 - STAFF
 
@@ -52,7 +52,7 @@ Online Pizza Ordering Webapplication
 
 To deploy this project on Tomcat
 
-Check the project from Git @ [pizzashopv1](https://github.com/raghureddyd/pizzashopv1) and run mvn clean install.
+Checkout the project from Git @ [pizzashopv1](https://github.com/raghureddyd/pizzashopv1) and run mvn clean install.
 
 Please make sure JAVA_HOME is set jdk-11
 

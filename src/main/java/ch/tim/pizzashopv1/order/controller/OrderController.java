@@ -1,7 +1,6 @@
 package ch.tim.pizzashopv1.order.controller;
 
 import ch.tim.pizzashopv1.common.dto.SearchPaginationResult;
-import ch.tim.pizzashopv1.common.exception.ApplicationException;
 import ch.tim.pizzashopv1.order.service.OrderService;
 import ch.tim.pizzashopv1.order.to.OrderDTO;
 import org.slf4j.Logger;
@@ -24,7 +23,7 @@ public class OrderController {
 
     private static final Logger log = LoggerFactory.getLogger(OrderController.class);
 
-    private OrderService orderService;
+    private final OrderService orderService;
 
     @Autowired
     public OrderController(OrderService orderService) {
